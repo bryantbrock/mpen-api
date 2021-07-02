@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client'
-import userData from './fixtures/users'
-import plodactivityData from './fixtures/plodactivities'
-
+const { PrismaClient } = require('@prisma/client')
+const userData = require('./fixtures/users')
+const plodactivityData = require('./fixtures/plodactivities')
 const prisma = new PrismaClient()
 
 const seedUsers = () => {

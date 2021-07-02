@@ -1,4 +1,4 @@
-export default [
+module.exports = [
   {
     title: 'Running',
     duration: '0:55',

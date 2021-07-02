@@ -1,10 +1,10 @@
 import app from './app';
-import config from './config';
-const { PORT } = config;
+
+const PORT = process.env.MPEN_PORT
 
 app.listen(PORT, () =>
   console.log(`
-    🚀 Server ready at: http://localhost:3000
+    🚀 Server ready at: http://localhost:${PORT}
     ⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api`
   ),
 )

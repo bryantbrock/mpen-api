@@ -1,4 +1,4 @@
-import express from 'express';
+import express from 'express'
 import { PrismaClient } from '@prisma/client'
 
 // routes
@@ -8,21 +8,10 @@ const app = express()
 app.use(express.json())
 
 app.post(`/signup`, async (req, res) => {
-  const { name, email, posts } = req.body
+  const { name, email } = req.body
+  const data = {data: {name, email}}
+  const result = await prisma.user.create(data)
 
-  const postData = posts ? posts.map((post) => {
-    return { title: post.title, content: post.content || undefined }
-  }) : []
-
-  const result = await prisma.user.create({
-    data: {
-      name,
-      email,
-      posts: {
-        create: postData
-      }
-    },
-  })
   res.json(result)
 })
 
@@ -72,7 +61,7 @@ app.put('/publish/:id', async (req, res) => {
 
     const updatedPost = await prisma.post.update({
       where: { id: Number(id) || undefined },
-      data: { published: !postData.published || undefined },
+      data: { published: !postData?.published },
     })
     res.json(updatedPost)
   } catch (error) {
@@ -119,31 +108,44 @@ app.get(`/post/:id`, async (req, res) => {
   res.json(post)
 })
 
-
 app.get('/feed', async (req, res) => {
 
   const { searchString, skip, take, orderBy } = req.query
 
   const or = searchString ? {
     OR: [
-      { title: { contains: searchString } },
-      { content: { contains: searchString } },
+      { title: { contains: searchString} },
+      { content: { contains: searchString} },
     ],
   } : {}
 
   const posts = await prisma.post.findMany({
-    where: Object.assign({
-      published: true
-    }, or),
+    where: {
+      published: true,
+      ...or
+    },
     include: { author: true },
     take: Number(take) || undefined,
     skip: Number(skip) || undefined,
     orderBy: {
-      updatedAt: orderBy || undefined
+      updatedAt: orderBy
     },
   })
 
   res.json(posts)
+})
+
+app.get('/', async (req, res) => {
+  const user = await prisma.user.findMany({
+    include: {
+      posts: true,
+      profile: true,
+    },
+  })
+    .catch((e) => {throw e})
+    .finally(async () => await prisma.$disconnect())
+
+  res.json({user})
 })
 
 export default app;

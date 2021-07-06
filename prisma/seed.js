@@ -1,20 +1,12 @@
 const { PrismaClient } = require('@prisma/client')
 const userData = require('./fixtures/users')
-const plodactivityData = require('./fixtures/plodactivities')
 const prisma = new PrismaClient()
-
-const seedUsers = () => {
-  console.log(userData)
-}
-
-const seedPlodactivities = () => {
-  console.log(plodactivityData)
-}
 
 async function main() {
   console.log(`Start seeding ...`)
-  seedUsers()
-  seedPlodactivities()
+
+  await prisma.user.create(userData[0])
+
   console.log(`Seeding finished.`)
 }
 

@@ -4,7 +4,7 @@
   "description": "MPEN API boilerplate",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js --exec babel-node",
+    "start": "node dist/server.js",
     "build": "npx babel src -d dist -s",
     "dev": "export $(xargs < .env) && nodemon server.js --exec babel-node",
     "prisma:migrate": "npx prisma migrate dev --name init && npx prisma generate",

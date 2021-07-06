@@ -1,6 +1,6 @@
 import app from './app';
 
-const PORT = process.env.MPEN_PORT
+const PORT = process.env.PORT || process.env.MPEN_PORT || 3001
 
 app.listen(PORT, () =>
   console.log(`

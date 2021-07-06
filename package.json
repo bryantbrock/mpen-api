@@ -23,6 +23,7 @@
     "@babel/node": "^7.14.7",
     "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.7",
+    "@babel/runtime": "^7.14.6",
     "nodemon": "^1.17.5",
     "prisma": "^2.26.0"
   }

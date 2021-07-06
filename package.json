@@ -4,7 +4,7 @@
   "description": "MERN Stack with ES6 and Typescript Boilerplate",
   "main": "server.js",
   "scripts": {
-    "start": "export $(xargs < .env) && node server.js  --exec babel-node",
+    "start": "node server.js  --exec babel-node",
     "dev": "export $(xargs < .env) && nodemon server.js --exec babel-node",
     "prisma:migrate": "npx prisma migrate dev --name init && npx prisma generate",
     "prisma:seed": "npx prisma db seed --preview-feature"

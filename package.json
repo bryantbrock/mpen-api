@@ -1,16 +1,15 @@
 {
-  "name": "mern_typescript",
+  "name": "mpen_api",
   "version": "1.0.0",
-  "description": "MERN Stack with ES6 and Typescript Boilerplate",
+  "description": "MPEN API boilerplate",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js  --exec babel-node",
+    "start": "nodemon server.js --exec babel-node",
     "dev": "export $(xargs < .env) && nodemon server.js --exec babel-node",
     "prisma:migrate": "npx prisma migrate dev --name init && npx prisma generate",
     "prisma:seed": "npx prisma db seed --preview-feature"
   },
-  "author": "Brad Traversy",
-  "license": "MIT",
+  "author": "Bryant Brock",
   "dependencies": {
     "@prisma/client": "2.24.1",
     "bcryptjs": "^2.4.3",
